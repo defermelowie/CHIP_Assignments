@@ -38,7 +38,10 @@ class generator;
     Z = (A + B) % 256;
     operation = 3'b0;
     flags_in = 4'b0;
-    flags_out = (((A+B)>Z) ? 4'b1000 : 4'b0000);  //TODO: Correct this
+    flags_out[3] = ((Z==0) ? 1'b1 : 1'b0); // zero flag
+    flags_out[2] = 1'b0; // subtract flag (always clear in addition)
+    flags_out[1] = ( (((A%16) + (B%16)) > 15) ? 1'b1 : 1'b0 ); // half carry flag
+    flags_out[0] = ( ((A + B) > Z) ? 1'b1 : 1'b0); // carry flag
 
     tra = new(A, B, flags_in, operation, Z, flags_out);
 
