@@ -4,6 +4,7 @@
 # Modelsim
 transcript
 *.mpf
+*wlf
 
 # Work lib
 */work
