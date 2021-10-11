@@ -1,0 +1,9 @@
+# vsCode workspace
+*.code-workspace
+
+# Modelsim
+transcript
+*.mpf
+
+# Work lib
+*/work
