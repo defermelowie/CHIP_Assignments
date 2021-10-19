@@ -37,26 +37,25 @@ class generator;
   endfunction : new
 
   task run(int test_case);
-
-    // Turn off all constraints
-    test_1.constraint_mode(0);
-    test_2.constraint_mode(0);
-    test_3.constraint_mode(0);
-    test_4.constraint_mode(0);
-    test_5.constraint_mode(0);
-
-    // Turn on the desired constraint
-    case (test_case)
-      1: test_1.constraint_mode(1);
-      2: test_2.constraint_mode(1);
-      3: test_3.constraint_mode(1);
-      4: test_4.constraint_mode(1);
-      5: test_5.constraint_mode(1);
-    endcase
-    
     transaction trans;
 
     forever begin
+      // Turn off all constraints
+      test_1.constraint_mode(0);
+      test_2.constraint_mode(0);
+      test_3.constraint_mode(0);
+      test_4.constraint_mode(0);
+      test_5.constraint_mode(0);
+  
+      // Turn on the desired constraint
+      case (test_case)
+        1: test_1.constraint_mode(1);
+        2: test_2.constraint_mode(1);
+        3: test_3.constraint_mode(1);
+        4: test_4.constraint_mode(1);
+        5: test_5.constraint_mode(1);
+      endcase
+
       trans = this.generateTransaction(test_case);
       $display("[%t | GEN] Generated transaction: %s", $time, trans.toString());
 
