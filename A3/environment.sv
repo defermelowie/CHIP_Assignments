@@ -45,7 +45,7 @@ class environment;
           this.drv.run_addition();
           this.che.run();
           this.mon.run();  // runs monitor forever
-          this.gen.run(1);
+          this.gen.run(2);
         join_none;
 
         /* wait for some spin up *******************/
