@@ -122,7 +122,7 @@ function new(byte A, byte B, bit[3:0] flags_in, bit[2:0] operation, byte Z, bit[
         this.flags_out[0] = 1'b0; // carry flag
       end
       'b111: begin
-        z = (a - b) % 256;
+        z = a;
         this.flags_out[3] = ((z==0) ? 1'b1 : 1'b0); // zero flag
         this.flags_out[2] = 1'b1; // subtract flag (always set in subtraction)
         this.flags_out[1] = ( ((a%16) < (b%16)) ? 1'b1 : 1'b0 ); // half carry flag
