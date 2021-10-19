@@ -9,6 +9,9 @@ class generator;
     transaction tra;
 
   // Define constraints
+  constraint illegal_state {
+    tra.A || tra.B || tra.Z || tra.flags_in || tra.flags_out || tra.operation == 1;
+  }
   constraint test_1 {
     tra.operation dist {[0:7]:=1};
   }
