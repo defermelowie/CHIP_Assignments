@@ -12,6 +12,29 @@ class transaction;
   rand bit [3:0] flags_in;
   bit [3:0] flags_out;
 
+  // Define constraints
+  constraint illegal_state {
+    A || B || Z || flags_in || flags_out || operation == 1;
+  }
+  constraint test_1 {
+    operation dist {[0:7]:=1};
+  }
+  constraint test_2 {
+    operation == 'b010;
+    unsigned'(A) < unsigned'(B);
+  }
+  constraint test_3 {
+    B == 'h55;
+    operation == 'b101;
+  }
+  constraint test_4 {
+    flags_in[0] == 'b1;
+    operation == 'b001;
+  }
+  constraint test_5 {
+    operation dist {7 := 1, [0:6] :/ 4};
+  }
+
 function new(byte A, byte B, bit[3:0] flags_in, bit[2:0] operation, byte Z, bit[3:0] flags_out);
     this.A = A;
     this.B = B;
@@ -21,11 +44,29 @@ function new(byte A, byte B, bit[3:0] flags_in, bit[2:0] operation, byte Z, bit[
     this.flags_out = flags_out;
   endfunction : new
 
+  function setTest(int test_case);
+    // Turn off all constraints
+    test_1.constraint_mode(0);
+    test_2.constraint_mode(0);
+    test_3.constraint_mode(0);
+    test_4.constraint_mode(0);
+    test_5.constraint_mode(0);
+
+    // Turn on the desired constraint
+    case (test_case)
+      1: test_1.constraint_mode(1);
+      2: test_2.constraint_mode(1);
+      3: test_3.constraint_mode(1);
+      4: test_4.constraint_mode(1);
+      5: test_5.constraint_mode(1);
+    endcase    
+  endfunction
+
   function string toString();
     return $sformatf("A: %02x, B: %02x, flags_in: %01x, operation: %01x, Z: %02x, flags_out: %01x", this.A, this.B, this.flags_in, this.operation, this.Z, this.flags_out);
   endfunction : toString
 
-  function updateOutputs;
+  function updateOutputs();
     shortint a, b, z;
     a = unsigned'(this.A);
     b = unsigned'(this.B);
