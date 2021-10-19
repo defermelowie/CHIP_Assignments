@@ -34,6 +34,8 @@ class generator;
   function new(mailbox #(transaction) g2d, mailbox #(transaction) g2c);
     this.gen2drv = g2d;
     this.gen2che = g2c;
+
+    srandom(1254878);
   endfunction : new
 
   task run(int test_case);
