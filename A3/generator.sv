@@ -14,7 +14,7 @@ class generator;
   }
   constraint test_2 {
     tra.operation == 'b010;
-    'unsigned(tra.A) < 'unsigned(tra.B);
+    unsigned'(tra.A) < unsigned'(tra.B);
   }
   constraint test_3 {
     tra.B == 'h55;
@@ -59,7 +59,7 @@ class generator;
     test_5.constraint_mode(0);
 
     // Turn on the desired constraint
-    case (test_case):
+    case (test_case)
       1: test_1.constraint_mode(1);
       2: test_2.constraint_mode(1);
       3: test_3.constraint_mode(1);
