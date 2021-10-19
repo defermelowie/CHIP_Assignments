@@ -68,7 +68,7 @@ class generator;
     endcase
 
     // Randomise
-    void'(tra.randomise());
+    void'(tra.randomize());
     tra.updateOutputs();
 
     return tra;
