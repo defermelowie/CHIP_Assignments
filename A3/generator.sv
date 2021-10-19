@@ -49,7 +49,7 @@ class generator;
 
   function transaction generateTransaction(int test_case);
     // Create transaction
-    tra = new();
+    tra = new(0, 0, 4'b0, 3'b0, 0, 4'b0);
 
     // Turn off all constraints
     test_1.constraint_mode(0);
