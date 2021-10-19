@@ -36,8 +36,6 @@ class generator;
   task run(int test_case);
     transaction tra;
 
-    $timeformat(-9,0," ns" , 10);
-
     forever begin
       tra = this.generateTransaction(test_case);
       $display("[%t | GEN] Generated transaction: %s", $time, tra.toString());

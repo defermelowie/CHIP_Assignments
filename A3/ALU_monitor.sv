@@ -17,7 +17,9 @@ class monitor;
     forever begin
       @(negedge this.ifc.clock);
       tra = new(this.ifc.data_a, this.ifc.data_b, this.ifc.flags_in, this.ifc.operation, this.ifc.data_z, this.ifc.flags_out);
-      this.mon2che.put(tra);
+      $display("[%t | MON] Recieved transaction: %s", $time, tra.toString());
+      if (!tra.A && !tra.B && !tra.Z && !tra.flags_in && !tra.flags_out && !tra.operation)
+        this.mon2che.put(tra);
     end /* forever */
   endtask : run
 
