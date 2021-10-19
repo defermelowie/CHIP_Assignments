@@ -5,6 +5,29 @@ class generator;
   mailbox #(transaction) gen2drv;
   mailbox #(transaction) gen2che;
 
+  // Define transaction
+    transaction tra;
+
+  // Define constraints
+  constraint test_1 {
+    tra.operation dist {[0:7]:=1};
+  }
+  constraint test_2 {
+    tra.operation == 'b010;
+    'unsigned(tra.A) < 'unsigned(tra.B);
+  }
+  constraint test_3 {
+    tra.B == 'h55;
+    tra.operation == 'b101;
+  }
+  constraint test_4 {
+    tra.flags_in[0] == 'b1;
+    tra.operation == 'b001;
+  }
+  constraint test_5 {
+    tra.operation dist {7 := 1, [0:6] :/ 4};
+  }
+
   function new(mailbox #(transaction) g2d, mailbox #(transaction) g2c);
     this.gen2drv = g2d;
     this.gen2che = g2c;
@@ -26,27 +49,7 @@ class generator;
 
   function transaction generateTransaction(int test_case);
     // Create transaction
-    transaction tra = new();
-
-    // Create constraints
-    constraint test_1 {
-      tra.operation dist {[0:7]:=1};
-    }
-    constraint test_2 {
-      tra.operation == 'b010;
-      'unsigned(tra.A) < 'unsigned(tra.B);
-    }
-    constraint test_3 {
-      tra.B == 'h55;
-      tra.operation == 'b101;
-    }
-    constraint test_4 {
-      tra.flags_in[0] == 'b1;
-      tra.operation == 'b001;
-    }
-    constraint test_5 {
-      tra.operation dist {7 := 1, [0:6] :/ 4};
-    }
+    tra = new();
 
     // Turn off all constraints
     test_1.constraint_mode(0);

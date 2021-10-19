@@ -64,21 +64,21 @@ class transaction;
         this.flags_out[3] = ((z==0) ? 1'b1 : 1'b0); // zero flag
         this.flags_out[2] = 1'b0; // subtract flag
         this.flags_out[1] = 1'b1; // half carry flag
-        this.flags_out[0] = 1'b0) // carry flag
+        this.flags_out[0] = 1'b0; // carry flag
       end
       'b101: begin
         z = (a || b) && !(a && b);
         this.flags_out[3] = ((z==0) ? 1'b1 : 1'b0); // zero flag
         this.flags_out[2] = 1'b0; // subtract flag
         this.flags_out[1] = 1'b0; // half carry flag
-        this.flags_out[0] = 1'b0) // carry flag
+        this.flags_out[0] = 1'b0; // carry flag
       end
       'b110: begin
         z = a || b;
         this.flags_out[3] = ((z==0) ? 1'b1 : 1'b0); // zero flag
         this.flags_out[2] = 1'b0; // subtract flag
         this.flags_out[1] = 1'b0; // half carry flag
-        this.flags_out[0] = 1'b0) // carry flag
+        this.flags_out[0] = 1'b0; // carry flag
       end
       'b111: begin
         z = (a - b) % 256;
