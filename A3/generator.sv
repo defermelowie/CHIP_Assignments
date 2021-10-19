@@ -41,11 +41,11 @@ class generator;
 
     forever begin
       // Turn off all constraints
-      test_1.constraint_mode(0);
-      test_2.constraint_mode(0);
-      test_3.constraint_mode(0);
-      test_4.constraint_mode(0);
-      test_5.constraint_mode(0);
+      //test_1.constraint_mode(0);
+      //test_2.constraint_mode(0);
+      //test_3.constraint_mode(0);
+      //test_4.constraint_mode(0);
+      //test_5.constraint_mode(0);
   
       // Turn on the desired constraint
       case (test_case)
