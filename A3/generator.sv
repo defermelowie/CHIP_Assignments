@@ -35,7 +35,7 @@ class generator;
     this.gen2drv = g2d;
     this.gen2che = g2c;
 
-    $random(1254878);
+    $urandom
   endfunction : new
 
   task run(int test_case);
