@@ -10,13 +10,13 @@ class generator;
     this.gen2che = g2c;
   endfunction : new
 
-  task run;
+  task run(int test_case);
     transaction tra;
 
     $timeformat(-9,0," ns" , 10);
 
     forever begin
-      tra = this.generateTransaction();
+      tra = this.generateTransaction(test_case);
       $display("[%t | GEN] Generated transaction: %s", $time, tra.toString());
 
       this.gen2drv.put(tra);
@@ -24,26 +24,49 @@ class generator;
     end
   endtask : run
 
-  function transaction generateTransaction;
-    byte A, B, Z;
-    bit [2:0] operation;
-    bit [3:0] flags_in;
-    bit [3:0] flags_out;
+  function transaction generateTransaction(int test_case);
+    // Create transaction
+    transaction tra = new();
 
-    transaction tra;
+    // Create constraints
+    constraint test_1 {
+      tra.operation dist {[0:7]:=1};
+    }
+    constraint test_2 {
+      tra.operation == 'b010;
+      'unsigned(tra.A) < 'unsigned(tra.B);
+    }
+    constraint test_3 {
+      tra.B == 'h55;
+      tra.operation == 'b101;
+    }
+    constraint test_4 {
+      tra.flags_in[0] == 'b1;
+      tra.operation == 'b001;
+    }
+    constraint test_5 {
+      tra.operation dist {7 := 1, [0:6] :/ 4};
+    }
 
-    /* for now only generate addition w.o. carry */
-    A = 20;
-    B = 40;
-    Z = (A + B) % 256;
-    operation = 3'b0;
-    flags_in = 4'b0;
-    flags_out[3] = ((Z==0) ? 1'b1 : 1'b0); // zero flag
-    flags_out[2] = 1'b0; // subtract flag (always clear in addition)
-    flags_out[1] = ( (((A%16) + (B%16)) > 15) ? 1'b1 : 1'b0 ); // half carry flag
-    flags_out[0] = ( ((A + B) > Z) ? 1'b1 : 1'b0); // carry flag
+    // Turn off all constraints
+    test_1.constraint_mode(0);
+    test_2.constraint_mode(0);
+    test_3.constraint_mode(0);
+    test_4.constraint_mode(0);
+    test_5.constraint_mode(0);
 
-    tra = new(A, B, flags_in, operation, Z, flags_out);
+    // Turn on the desired constraint
+    case (test_case):
+      1: test_1.constraint_mode(1);
+      2: test_2.constraint_mode(1);
+      3: test_3.constraint_mode(1);
+      4: test_4.constraint_mode(1);
+      5: test_5.constraint_mode(1);
+    endcase
+
+    // Randomise
+    void'(tra.randomise());
+    tra.updateOutputs();
 
     return tra;
   endfunction : generateTransaction

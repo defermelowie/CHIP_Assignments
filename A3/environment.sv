@@ -42,10 +42,10 @@ class environment;
       begin
         /* start the upstream **********************/
         fork
-          this.mon.run();  // runs monitor forever
           this.drv.run_addition();
           this.che.run();
-          this.gen.run();
+          this.mon.run();  // runs monitor forever
+          this.gen.run(1);
         join_none;
 
         /* wait for some spin up *******************/
