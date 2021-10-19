@@ -17,7 +17,7 @@ class driver;
 
     $timeformat(-9,0," ns" , 10);
 
-    $display($sformatf("[%t | DRV] I will start driving for addition", $time));
+    $display($sformatf("[%t | DRV] I will start driving", $time));
     
     forever begin
       this.gen2drv.get(tra);  // INFO: Blocking function

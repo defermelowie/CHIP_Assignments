@@ -37,20 +37,6 @@ class generator;
   endfunction : new
 
   task run(int test_case);
-    transaction tra;
-
-    forever begin
-      tra = this.generateTransaction(test_case);
-      $display("[%t | GEN] Generated transaction: %s", $time, tra.toString());
-
-      this.gen2drv.put(tra);
-      this.gen2che.put(tra);
-    end
-  endtask : run
-
-  function transaction generateTransaction(int test_case);
-    // Create transaction
-    tra = new(0, 0, 4'b0, 3'b0, 0, 4'b0);
 
     // Turn off all constraints
     test_1.constraint_mode(0);
@@ -67,6 +53,21 @@ class generator;
       4: test_4.constraint_mode(1);
       5: test_5.constraint_mode(1);
     endcase
+    
+    transaction trans;
+
+    forever begin
+      trans = this.generateTransaction(test_case);
+      $display("[%t | GEN] Generated transaction: %s", $time, trans.toString());
+
+      this.gen2drv.put(trans);
+      this.gen2che.put(trans);
+    end
+  endtask : run
+
+  function transaction generateTransaction(int test_case);
+    // Create transaction
+    tra = new(0, 0, 4'b0, 3'b0, 0, 4'b0);
 
     // Randomise
     void'(tra.randomize());
