@@ -12,13 +12,13 @@ class transaction;
   rand bit [3:0] flags_in;
   bit [3:0] flags_out;
 
-  function new();
-    this.A = 0;
-    this.B = 0;
-    this.Z = 0;
-    this.operation = 3'b0;
-    this.flags_in = 4'b0;
-    this.flags_out = 4'b0;
+function new(byte A, byte B, bit[3:0] flags_in, bit[2:0] operation, byte Z, bit[3:0] flags_out);
+    this.A = A;
+    this.B = B;
+    this.Z = Z;
+    this.operation = operation;
+    this.flags_in = flags_in;
+    this.flags_out = flags_out;
   endfunction : new
 
   function string toString();
