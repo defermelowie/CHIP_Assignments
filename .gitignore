@@ -1,10 +1,26 @@
-# vsCode workspace
+##################
+#     VSCode     #
+##################
+
+# Workspace
 *.code-workspace
 
-# Modelsim
+##################
+#    Modelsim    #
+##################
+
 transcript
 *.mpf
-*wlf
+*.wlf
 
 # Work lib
 */work
+
+########################
+#  Assignment uploads  #
+########################
+
+**Assignment**.rar
+**Assignment**.tar
+
+submission_conformation_code.txt
