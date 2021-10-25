@@ -12,7 +12,7 @@ class generator;
 
   task run(int test_case);
     transaction trans;
-    $display("[%t | GEN] Started running test %d", $time, test_case);
+    $display("[%t | GEN] Started running test %0d", $time, test_case);
     forever begin
       trans = this.generateTransaction(test_case);
       //$display("[%t | GEN] Generated transaction: %s", $time, trans.toString());
