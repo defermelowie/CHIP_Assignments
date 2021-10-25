@@ -39,12 +39,16 @@ class environment;
 
   task flush_mailboxes();
     byte result;
-    while (
-      this.gen2drv.try_get(result) ||
-      this.gen2che.try_get(result) ||
-      this.che2scb.try_get(result) ||
-      this.mon2che.try_get(result)
-      );
+    int g2d = this.gen2drv.try_get(result);
+    int g2c = this.gen2che.try_get(result);
+    int c2s = this.che2scb.try_get(result);
+    int m2c = this.mon2che.try_get(result);
+    while (g2d || g2c || c2s || m2c) begin
+        $display("[ENV] g2d: %s", (g2d) ? "Not empty" : "Empty");
+        $display("[ENV] g2c: %s", (g2c) ? "Not empty" : "Empty");
+        $display("[ENV] c2s: %s", (c2s) ? "Not empty" : "Empty");
+        $display("[ENV] m2c: %s", (m2c) ? "Not empty" : "Empty");
+      end
   endtask : flush_mailboxes
 
   task run();
