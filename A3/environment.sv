@@ -60,7 +60,7 @@ class environment;
       end
     join;
 
-     fork
+    fork
       begin
         // Second test
         fork
