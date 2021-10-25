@@ -30,10 +30,10 @@ class scoreboard;
       if (result > 0)
       begin 
         no_tests_ok++; 
-        $display("[%t | SCB] successful test registered", $time);
+        //$display("[%t | SCB] successful test registered", $time);
       end else begin
         no_tests_nok++;
-        $display("[%t | SCB] unsuccessful test registered", $time);
+        //$display("[%t | SCB] unsuccessful test registered", $time);
       end
     end /* while*/
   endtask : run

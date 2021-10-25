@@ -15,7 +15,7 @@ class generator;
 
     forever begin
       trans = this.generateTransaction(test_case);
-      $display("[%t | GEN] Generated transaction: %s", $time, trans.toString());
+      //$display("[%t | GEN] Generated transaction: %s", $time, trans.toString());
 
       this.gen2drv.put(trans);
       this.gen2che.put(trans);
