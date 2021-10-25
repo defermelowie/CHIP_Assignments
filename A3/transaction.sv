@@ -83,8 +83,8 @@ function new(byte A, byte B, bit[3:0] flags_in, bit[2:0] operation, byte Z, bit[
         z = (a + b + this.flags_in[0]) % 256;
         this.flags_out[3] = ((z==0) ? 1'b1 : 1'b0); // zero flag
         this.flags_out[2] = 1'b0; // subtract flag (always clear in addition)
-        this.flags_out[1] = ( (((a%16) + (b%16)) > 15) ? 1'b1 : 1'b0 ); // half carry flag
-        this.flags_out[0] = ( ((a + b) > z) ? 1'b1 : 1'b0); // carry flag
+        this.flags_out[1] = ( (((a%16) + (b%16) + this.flags_in[0]) > 15) ? 1'b1 : 1'b0 ); // half carry flag
+        this.flags_out[0] = ( ((a + b + this.flags_in[0]) > z) ? 1'b1 : 1'b0); // carry flag
       end
       'b010: begin
         z = (a - b) % 256;
@@ -94,10 +94,10 @@ function new(byte A, byte B, bit[3:0] flags_in, bit[2:0] operation, byte Z, bit[
         this.flags_out[0] = ( (a < b) ? 1'b1 : 1'b0); // borrow flag
       end
       'b011: begin
-        z = (a - b + this.flags_in[0]) % 256;
+        z = (a - b - this.flags_in[0]) % 256;
         this.flags_out[3] = ((z==0) ? 1'b1 : 1'b0); // zero flag
         this.flags_out[2] = 1'b1; // subtract flag (always set in subtraction)
-        this.flags_out[1] = ( ((a%16) < (b%16)) ? 1'b1 : 1'b0 ); // half carry flag
+        this.flags_out[1] = ( ((a%16) < (b%16 + this.flags_in[0])) ? 1'b1 : 1'b0 ); // half carry flag
         this.flags_out[0] = ( (a < b) ? 1'b1 : 1'b0); // borrow flag
       end
       'b100: begin
