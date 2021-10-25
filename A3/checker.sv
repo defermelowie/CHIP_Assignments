@@ -31,6 +31,9 @@ class checkers;
         end
       end else begin
         this.che2scb.put(byte'(0));
+        $display("[%t | MON] unsuccessful test registered:", $time);
+        $display("\t Recieved: %s", received_result.toString());
+        $display("\t Expected: %s", expected_result.toString());
       end
     end
   endtask
