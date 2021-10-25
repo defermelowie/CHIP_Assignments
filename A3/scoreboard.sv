@@ -40,7 +40,7 @@ class scoreboard;
 
 
   task showReport;
-    $display("[SCB] Test report");
+    $display("[%t | SCB] Test report", $time);
     $display("[SCB] ------------");
     $display("[SCB] # tests done         : %0d", this.no_tests_done);
     $display("[SCB] # tests ok           : %0d", this.no_tests_ok);
