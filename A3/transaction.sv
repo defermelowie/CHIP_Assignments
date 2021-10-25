@@ -98,7 +98,7 @@ function new(byte A, byte B, bit[3:0] flags_in, bit[2:0] operation, byte Z, bit[
         this.flags_out[3] = ((z==0) ? 1'b1 : 1'b0); // zero flag
         this.flags_out[2] = 1'b1; // subtract flag (always set in subtraction)
         this.flags_out[1] = ( ((a%16) < (b%16 + this.flags_in[0])) ? 1'b1 : 1'b0 ); // half carry flag
-        this.flags_out[0] = ( (a < b) ? 1'b1 : 1'b0); // borrow flag
+        this.flags_out[0] = ( (a < b + this.flags_in[0]) ? 1'b1 : 1'b0); // borrow flag
       end
       'b100: begin
         z = a & b;
