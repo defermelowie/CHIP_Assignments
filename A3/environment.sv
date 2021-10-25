@@ -52,7 +52,7 @@ class environment;
       fork
         begin
           // First test
-          this.scb.flush_che2scb();
+          //this.scb.flush_che2scb();
 
           fork
             this.gen.run(1);
@@ -68,7 +68,7 @@ class environment;
       fork
         begin
           // Second test
-          this.scb.flush_che2scb();
+          //this.scb.flush_che2scb();
 
           fork
             this.gen.run(2);
