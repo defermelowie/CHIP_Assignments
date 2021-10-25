@@ -14,7 +14,7 @@ class transaction;
 
   // Define constraints
   constraint illegal_state {
-    A || B || Z || flags_in || flags_out || operation == 1;
+    A || B || flags_in || operation == 1;
   }
   constraint test_1 {
     operation dist {[0:7]:=1};

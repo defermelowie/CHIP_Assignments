@@ -18,7 +18,7 @@ class monitor;
       @(negedge this.ifc.clock);
       tra = new(this.ifc.data_a, this.ifc.data_b, this.ifc.flags_in, this.ifc.operation, this.ifc.data_z, this.ifc.flags_out);
       
-      if (tra.A || tra.B || tra.Z || tra.flags_in || tra.flags_out || tra.operation) begin
+      if (tra.A || tra.B || tra.flags_in || tra.operation) begin
         //$display("[%t | MON] Recieved transaction: %s", $time, tra.toString());
         this.mon2che.put(tra);
       end

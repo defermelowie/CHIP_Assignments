@@ -20,13 +20,21 @@ class driver;
     $display($sformatf("[%t | DRV] I will start driving", $time));
     
     forever begin
-      this.gen2drv.get(tra);  // INFO: Blocking function
+      int data_aviable = this.gen2drv.try_get(tra);  // INFO: Blocking function
 
       @(negedge this.ifc.clock);
-      this.ifc.data_a <= tra.A;
-      this.ifc.data_b <= tra.B;
-      this.ifc.flags_in <= tra.flags_in;
-      this.ifc.operation <= tra.operation;
+
+      if(data_aviable) begin
+        this.ifc.data_a <= tra.A;
+        this.ifc.data_b <= tra.B;
+        this.ifc.flags_in <= tra.flags_in;
+        this.ifc.operation <= tra.operation;
+      end else begin
+        this.ifc.data_a <= 0;
+        this.ifc.data_b <= 0;
+        this.ifc.flags_in <= 0;
+        this.ifc.operation <= 0;
+      end
     end
 
     $display($sformatf("[%t | DRV] done", $time));
