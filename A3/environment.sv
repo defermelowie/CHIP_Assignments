@@ -39,28 +39,22 @@ class environment;
 
   task run();
     fork
-      begin
         /* start the upstream **********************/
         fork
           this.drv.run_addition();
           this.che.run();
           this.mon.run();  // runs monitor forever
-          this.gen.run(1);
         join_none;
 
-        /* wait for some spin up *******************/
-        repeat (10) @(posedge this.ifc.clock);
+        begin
+          fork
+            this.gen.run(1);
+            this.scb.run(100);
+          join
 
-        fork
-          this.scb.run(10000);
-        join
-
-        /* wait for some spin down *****************/
-        repeat (10) @(posedge this.ifc.clock);
-
-        // terminate threads
-        disable fork;
-      end;
+          // terminate threads
+          disable fork;
+        end
     join;
 
     this.scb.showReport();
