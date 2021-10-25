@@ -75,9 +75,9 @@ class environment;
         end
       join;
 
-      repeat (10) @(posedge this.ifc.clock);
-
       disable fork;
+
+      repeat (10) @(posedge this.ifc.clock);
 
       this.scb.showReport();
       $stop;
