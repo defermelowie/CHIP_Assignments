@@ -38,45 +38,50 @@ class environment;
   endfunction : new
 
   task run();
-    /* start the upstream **********************/
-    fork
-      this.drv.run_addition();
-      this.che.run();
-      this.mon.run();  // runs monitor forever
-    join_none;
+    begin
+      // Start env
+      fork
+        this.drv.run_addition();
+        this.che.run();
+        this.mon.run();  // runs monitor forever
+      join_none;
 
-    repeat (10) @(posedge this.ifc.clock);
-    
-    // Start generator and scoreboard
-    fork
-      begin
-        // First test
-        fork
-          this.gen.run(1);
-          this.scb.run(100);
-        join_any;
+      repeat (10) @(posedge this.ifc.clock);
+      
+      // Start generator and scoreboard
+      fork
+        begin
+          // First test
+          fork
+            this.gen.run(1);
+            this.scb.run(100);
+          join_any;
 
-        disable fork;
-      end
-    join;
+          disable fork;
+        end
+      join;
 
-    fork
-      begin
-        // Second test
-        fork
-          this.gen.run(2);
-          this.scb.run(100);
-        join_any;
+      repeat (10) @(posedge this.ifc.clock);
 
-        disable fork;
-      end
-    join;
+      fork
+        begin
+          // Second test
+          fork
+            this.gen.run(2);
+            this.scb.run(100);
+          join_any;
 
-    disable fork;
+          disable fork;
+        end
+      join;
 
-    this.scb.showReport();
-    $stop;
+      repeat (10) @(posedge this.ifc.clock);
 
+      disable fork;
+
+      this.scb.showReport();
+      $stop;
+    end
   endtask : run
 
 endclass : environment
