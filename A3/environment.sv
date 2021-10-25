@@ -37,6 +37,16 @@ class environment;
     this.scb = new(this.che2scb);
   endfunction : new
 
+  task flush_mailboxes();
+    byte result;
+    while (
+      this.gen2drv.try_get(result) ||
+      this.gen2che.try_get(result) ||
+      this.che2scb.try_get(result) ||
+      this.mon2che.try_get(result)
+      );
+  endtask : flush_mailboxes
+
   task run();
     begin
       // Start env
@@ -52,7 +62,7 @@ class environment;
       fork
         begin
           // First test
-          //this.scb.flush_che2scb();
+          flush_mailboxes();
 
           fork
             this.gen.run(1);
@@ -68,7 +78,7 @@ class environment;
       fork
         begin
           // Second test
-          //this.scb.flush_che2scb();
+          flush_mailboxes();
 
           fork
             this.gen.run(2);

@@ -46,9 +46,4 @@ class scoreboard;
     $display("[SCB] # tests success rate : %0.2f", this.no_tests_ok*100.0/this.no_tests_done);
   endtask : showReport
 
-  task flush_che2scb;
-    byte result;
-    while (this.che2scb.try_get(result));
-  endtask : flush_che2scb
-
 endclass : scoreboard
