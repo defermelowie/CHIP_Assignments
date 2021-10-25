@@ -48,6 +48,10 @@ class environment;
         $display("[ENV] g2c: %s", (g2c) ? "Not empty" : "Empty");
         $display("[ENV] c2s: %s", (c2s) ? "Not empty" : "Empty");
         $display("[ENV] m2c: %s", (m2c) ? "Not empty" : "Empty");
+        g2d = this.gen2drv.try_get(result);
+        g2c = this.gen2che.try_get(result);
+        c2s = this.che2scb.try_get(result);
+        m2c = this.mon2che.try_get(result);
       end
   endtask : flush_mailboxes
 
