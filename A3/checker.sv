@@ -26,17 +26,20 @@ class checkers;
         end else begin
           this.che2scb.put(byte'(0));
         $display("\n[%t | CHE] unsuccessful test registered", $time);
-        $display("----------------------------------------");
-        $display("[CHE] Recieved: %s", received_result.toString());
-        $display("[CHE] Expected: %s", expected_result.toString());
+        //$display("----------------------------------------");
+        //$display("[CHE] Recieved: %s", received_result.toString());
+        //$display("[CHE] Expected: %s", expected_result.toString());
         end
       end else begin
         this.che2scb.put(byte'(0));
         $display("\n[%t | CHE] unsuccessful test registered", $time);
-        $display("----------------------------------------");
-        $display("[CHE] Recieved: %s", received_result.toString());
-        $display("[CHE] Expected: %s", expected_result.toString());
+        //$display("----------------------------------------");
+        //$display("[CHE] Recieved: %s", received_result.toString());
+        //$display("[CHE] Expected: %s", expected_result.toString());
       end
+      $display("----------------------------------------");
+      $display("[CHE] Recieved: %s", received_result.toString());
+      $display("[CHE] Expected: %s", expected_result.toString());
     end
   endtask
   
