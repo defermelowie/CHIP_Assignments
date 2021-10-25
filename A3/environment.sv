@@ -52,7 +52,7 @@ class environment;
         repeat (10) @(posedge this.ifc.clock);
 
         fork
-          this.scb.run(100);
+          this.scb.run(10000);
         join
 
         /* wait for some spin down *****************/
