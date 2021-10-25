@@ -57,34 +57,14 @@ class environment;
         join_any;
 
         disable fork;
+      end
+    join;
 
+     fork
+      begin
         // Second test
         fork
           this.gen.run(2);
-          this.scb.run(100);
-        join_any;
-
-        disable fork;
-
-        // Third test
-        fork
-          this.gen.run(3);
-          this.scb.run(100);
-        join_any;
-
-        disable fork;
-
-        // Fourth test
-        fork
-          this.gen.run(4);
-          this.scb.run(100);
-        join_any;
-
-        disable fork;
-
-        // Fifth test
-        fork
-          this.gen.run(1);
           this.scb.run(100);
         join_any;
 
