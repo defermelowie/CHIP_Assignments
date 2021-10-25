@@ -50,7 +50,7 @@ class environment;
           fork
             this.gen.run(1);
             this.scb.run(100);
-          join
+          join_any;
 
           // terminate threads
           disable fork;
