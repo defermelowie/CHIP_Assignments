@@ -20,7 +20,7 @@ class driver;
     $display($sformatf("[%t | DRV] I will start driving", $time));
     
     forever begin
-      int data_aviable = this.gen2drv.try_get(tra);  // INFO: Blocking function
+      int data_aviable = this.gen2drv.try_get(tra);  // INFO: Non-blocking function
 
       @(negedge this.ifc.clock);
 
@@ -29,18 +29,16 @@ class driver;
         this.ifc.data_b <= tra.B;
         this.ifc.flags_in <= tra.flags_in;
         this.ifc.operation <= tra.operation;
-        $display("[%t | DRV] Drove %02x, B: %02x, flags_in: %01x, operation: %01x,", $time, tra.A, tra.B, tra.flags_in, tra.operation);
+        $display("[%t | DRV] Drove A: %02x, B: %02x, flags_in: %01x, operation: %01x", $time, tra.A, tra.B, tra.flags_in, tra.operation);
       end else begin
         this.ifc.data_a <= 0;
         this.ifc.data_b <= 0;
         this.ifc.flags_in <= 0;
         this.ifc.operation <= 0;
-        $display("[%t | DRV] Drove A: 0, B: 0, flags_in: 0, operation: 0", $time);
+        $display("[%t | DRV] Drove A: 00, B: 00, flags_in: 0, operation: 0", $time);
       end
     end
 
-    $display($sformatf("[%t | DRV] done", $time));
-         
   endtask : run_addition
 
 endclass : driver
