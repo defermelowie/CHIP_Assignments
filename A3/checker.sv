@@ -37,10 +37,10 @@ class checkers;
         $display("[CHE] Recieved: %s", received_result.toString());
         $display("[CHE] Expected: %s", expected_result.toString());
       end
-      $display("\n[%t | CHE] successful test registered", $time);
-      $display("----------------------------------------");
-      $display("[CHE] Recieved: %s", received_result.toString());
-      $display("[CHE] Expected: %s", expected_result.toString());
+      // $display("\n[%t | CHE] successful test registered", $time);
+      // $display("----------------------------------------");
+      // $display("[CHE] Recieved: %s", received_result.toString());
+      // $display("[CHE] Expected: %s", expected_result.toString());
     end
   endtask
   
