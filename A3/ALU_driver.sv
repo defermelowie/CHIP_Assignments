@@ -27,13 +27,13 @@ class driver;
         this.ifc.data_b <= tra.B;
         this.ifc.flags_in <= tra.flags_in;
         this.ifc.operation <= tra.operation;
-        $display("[%t | DRV] Drove A: %02x, B: %02x, flags_in: %01x, operation: %01x", $time, tra.A, tra.B, tra.flags_in, tra.operation);
+        //$display("[%t | DRV] Drove A: %02x, B: %02x, flags_in: %01x, operation: %01x", $time, tra.A, tra.B, tra.flags_in, tra.operation);
       end else begin
         this.ifc.data_a <= 0;
         this.ifc.data_b <= 0;
         this.ifc.flags_in <= 0;
         this.ifc.operation <= 0;
-        $display("[%t | DRV] Drove A: 00, B: 00, flags_in: 0, operation: 0", $time);
+        //$display("[%t | DRV] Drove A: 00, B: 00, flags_in: 0, operation: 0", $time);
       end
     end
 
@@ -46,7 +46,7 @@ class driver;
     this.ifc.flags_in <= 0;
     this.ifc.operation <= 0;
     $display("[%t | DRV] DUT RESET", $time);
-    $display("[%t | DRV] Drove A: 00, B: 00, flags_in: 0, operation: 0", $time);
+    //$display("[%t | DRV] Drove A: 00, B: 00, flags_in: 0, operation: 0", $time);
   endtask
 
 endclass : driver

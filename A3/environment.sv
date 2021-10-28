@@ -46,13 +46,13 @@ class environment;
 
     while (g2d || g2c || c2s || m2c) begin
         g2d = this.gen2drv.try_get(result);
-        $display("[%t | ENV] g2d: %s",$time, (g2d) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
+        //$display("[%t | ENV] g2d: %s",$time, (g2d) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
         g2c = this.gen2che.try_get(result);
-        $display("[%t | ENV] g2c: %s",$time, (g2c) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
+        //$display("[%t | ENV] g2c: %s",$time, (g2c) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
         c2s = this.che2scb.try_get(result);
-        $display("[%t | ENV] c2s: %s",$time, (c2s) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
+        //$display("[%t | ENV] c2s: %s",$time, (c2s) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
         m2c = this.mon2che.try_get(result);
-        $display("[%t | ENV] m2c: %s",$time, (m2c) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
+        //$display("[%t | ENV] m2c: %s",$time, (m2c) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
       end
   endtask : flush_mailboxes
 
@@ -107,7 +107,7 @@ class environment;
           $display("[%t | ENV] test 2: done", $time);
         end
       join;
-      /*
+      
       // Third test
       fork
         begin
@@ -157,7 +157,7 @@ class environment;
           $display("[%t | ENV] test 4: done", $time);
         end
       join;
-*/
+
       repeat (10) @(posedge this.ifc.clock);
 
       this.scb.showReport();

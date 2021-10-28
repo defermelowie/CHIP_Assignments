@@ -21,7 +21,7 @@ class monitor;
       tra = new(this.ifc.data_a, this.ifc.data_b, this.ifc.flags_in, this.ifc.operation, this.ifc.data_z, this.ifc.flags_out);
       
       if (tra.A || tra.B || tra.flags_in || tra.operation) begin
-        $display("[%t | MON] Recieved: %s", $time, tra.toString());
+        //$display("[%t | MON] Recieved: %s", $time, tra.toString());
         this.mon2che.put(tra);
       end
     end /* forever */
