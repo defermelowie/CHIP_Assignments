@@ -197,7 +197,7 @@ class environment;
 
           disable fork;
 
-          $display("[%t | ENV] test 4: done", $time);
+          $display("[%t | ENV] test 5: done", $time);
         end
       join;
 
