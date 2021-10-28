@@ -7,7 +7,7 @@ module test (ALU_iface ifc);
 
   initial
   begin
-    $timeformat(-9,0," ns" , 10);
+    $timeformat(-9,0," ns" , 7);
     env.run();
   end
 
