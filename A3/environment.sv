@@ -58,15 +58,20 @@ class environment;
 
   task run();
     begin      
-      // Start generator and scoreboard
+      // First test
       fork
         begin
-          // First test
           flush_mailboxes();
+
           fork
             this.drv.run_addition();
             this.che.run();
             this.mon.run();
+          join_none;
+
+          repeat (10) @(posedge this.ifc.clock);
+
+          fork
             this.gen.run(1);
             this.scb.run(100);
           join_any;
@@ -75,16 +80,20 @@ class environment;
         end
       join;
 
-      repeat (10) @(posedge this.ifc.clock);
-
+      // Second test
       fork
         begin
-          // Second test
           flush_mailboxes();
+
           fork
             this.drv.run_addition();
             this.che.run();
             this.mon.run();
+          join_none;
+
+          repeat (10) @(posedge this.ifc.clock);
+
+          fork
             this.gen.run(2);
             this.scb.run(100);
           join_any;
@@ -92,19 +101,21 @@ class environment;
           disable fork;
         end
       join;
-
-      disable fork;
-
-      repeat (10) @(posedge this.ifc.clock);
-
+      
+      // Third test
       fork
         begin
-          // Third test
           flush_mailboxes();
+
           fork
             this.drv.run_addition();
             this.che.run();
             this.mon.run();
+          join_none;
+
+          repeat (10) @(posedge this.ifc.clock);
+
+          fork
             this.gen.run(3);
             this.scb.run(100);
           join_any;
@@ -113,18 +124,20 @@ class environment;
         end
       join;
 
-      disable fork;
-
-      repeat (10) @(posedge this.ifc.clock);
-
+      // Fourth test
       fork
         begin
-          // Fourth test
           flush_mailboxes();
+
           fork
             this.drv.run_addition();
             this.che.run();
             this.mon.run();
+          join_none;
+
+          repeat (10) @(posedge this.ifc.clock);
+
+          fork
             this.gen.run(4);
             this.scb.run(100);
           join_any;
