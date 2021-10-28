@@ -158,6 +158,31 @@ class environment;
         end
       join;
 
+      // Fifth test
+      fork
+        begin
+          this.drv.reset_dut();
+          flush_mailboxes();
+
+          fork
+            this.drv.run();
+            this.che.run();
+            this.mon.run();
+          join_none;
+
+          repeat (10) @(posedge this.ifc.clock);
+
+          fork
+            this.gen.run(5);
+            this.scb.run(1000);
+          join_any;
+
+          disable fork;
+
+          $display("[%t | ENV] test 4: done", $time);
+        end
+      join;
+
       repeat (10) @(posedge this.ifc.clock);
 
       this.scb.showReport();
