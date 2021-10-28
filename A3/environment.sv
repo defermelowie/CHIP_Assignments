@@ -37,31 +37,12 @@ class environment;
     this.scb = new(this.che2scb);
   endfunction : new
 
-  task flush_mailboxes();
-    transaction result;
-    int g2d = 1;
-    int g2c = 1;
-    int c2s = 1;
-    int m2c = 1;
-
-    while (g2d || g2c || c2s || m2c) begin
-        g2d = this.gen2drv.try_get(result);
-        $display("[ENV] g2d: %s", (g2d) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
-        g2c = this.gen2che.try_get(result);
-        $display("[ENV] g2c: %s", (g2c) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
-        c2s = this.che2scb.try_get(result);
-        $display("[ENV] c2s: %s", (c2s) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
-        m2c = this.mon2che.try_get(result);
-        $display("[ENV] m2c: %s", (m2c) ? $sformatf("Not empty: %s", result.toString()) : "Empty");
-      end
-  endtask : flush_mailboxes
-
   task run();
     begin
       // Start env
       fork
-        this.drv.run_addition();
-        this.che.run();
+        this.drv.run_addition();  // runs driver forever
+        this.che.run();  // runs checker forever
         this.mon.run();  // runs monitor forever
       join_none;
 
@@ -71,8 +52,6 @@ class environment;
       fork
         begin
           // First test
-          flush_mailboxes();
-
           fork
             this.gen.run(1);
             this.scb.run(100);
@@ -87,8 +66,6 @@ class environment;
       fork
         begin
           // Second test
-          flush_mailboxes();
-
           fork
             this.gen.run(2);
             this.scb.run(100);
