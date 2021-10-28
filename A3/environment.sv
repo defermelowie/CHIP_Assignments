@@ -57,33 +57,45 @@ class environment;
   endtask : flush_mailboxes
 
   task run();
-    begin      
-      // First test
+    begin
+      
+      /********************\
+      |     First test     |
+      \********************/
       fork
         begin
-          this.drv.reset_dut();
-          flush_mailboxes();
+          this.drv.reset_dut(); // Set DUT inputs to 0 (Causes the monitor to NOT sample)
+          flush_mailboxes();    // Make sure all mailboxes are empty
 
+          /* 
+          Start driver, monitor and checker
+            They have to be stopped after every test since trying to flush 
+            the mailboxes while having pending get()'s causes buggy behaviour
+          */
           fork
             this.drv.run();
             this.che.run();
             this.mon.run();
           join_none;
 
-          repeat (10) @(posedge this.ifc.clock);
-
+          repeat (10) @(posedge this.ifc.clock);  // Wait some time in order for things to spin up
+          
+          // Start generator for specific test and scoreboard for specific nr of tests
           fork
             this.gen.run(1);
             this.scb.run(100);
           join_any;
 
+          // Stops generator, driver, checker & monitor after scoreboard has finished
           disable fork;
 
           $display("[%t | ENV] test 1: done", $time);
         end
       join;
 
-      // Second test
+      /********************\
+      |     Second test    |
+      \********************/
       fork
         begin
           this.drv.reset_dut();
@@ -108,7 +120,9 @@ class environment;
         end
       join;
       
-      // Third test
+      /********************\
+      |     Third test     |
+      \********************/
       fork
         begin
           this.drv.reset_dut();
@@ -133,7 +147,9 @@ class environment;
         end
       join;
 
-      // Fourth test
+      /********************\
+      |     Fourth test    |
+      \********************/
       fork
         begin
           this.drv.reset_dut();
@@ -158,7 +174,9 @@ class environment;
         end
       join;
 
-      // Fifth test
+      /********************\
+      |     Fifth test     |
+      \********************/
       fork
         begin
           this.drv.reset_dut();
@@ -183,8 +201,9 @@ class environment;
         end
       join;
 
-      repeat (10) @(posedge this.ifc.clock);
-
+      /********************\
+      |    Show report     |
+      \********************/
       this.scb.showReport();
       $stop;
     end
