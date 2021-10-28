@@ -79,6 +79,38 @@ class environment;
 
       repeat (10) @(posedge this.ifc.clock);
 
+      fork
+        begin
+          // Third test
+          fork
+            this.gen.run(3);
+            this.scb.run(100);
+          join_any;
+
+          disable fork;
+        end
+      join;
+
+      disable fork;
+
+      repeat (10) @(posedge this.ifc.clock);
+
+      fork
+        begin
+          // Fourth test
+          fork
+            this.gen.run(4);
+            this.scb.run(100);
+          join_any;
+
+          disable fork;
+        end
+      join;
+
+      disable fork;
+
+      repeat (10) @(posedge this.ifc.clock);
+
       this.scb.showReport();
       $stop;
     end
