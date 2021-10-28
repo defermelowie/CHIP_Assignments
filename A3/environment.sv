@@ -77,6 +77,8 @@ class environment;
           join_any;
 
           disable fork;
+
+          $display("[ENV] test 1: done");
         end
       join;
 
@@ -99,9 +101,11 @@ class environment;
           join_any;
 
           disable fork;
+
+          $display("[ENV] test 2: done");
         end
       join;
-      
+      /*
       // Third test
       fork
         begin
@@ -121,6 +125,8 @@ class environment;
           join_any;
 
           disable fork;
+
+          $display("[ENV] test 3: done");
         end
       join;
 
@@ -143,11 +149,11 @@ class environment;
           join_any;
 
           disable fork;
+
+          $display("[ENV] test 4: done");
         end
       join;
-
-      disable fork;
-
+*/
       repeat (10) @(posedge this.ifc.clock);
 
       this.scb.showReport();
