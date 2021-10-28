@@ -29,11 +29,13 @@ class driver;
         this.ifc.data_b <= tra.B;
         this.ifc.flags_in <= tra.flags_in;
         this.ifc.operation <= tra.operation;
+        $display("[%t | DRV] Drove A: %d, B: %d, flags_in: %d, operation: %D", $time, tra.A, tra.B, tra.flags_in, tra.operation);
       end else begin
         this.ifc.data_a <= 0;
         this.ifc.data_b <= 0;
         this.ifc.flags_in <= 0;
         this.ifc.operation <= 0;
+        $display("[%t | DRV] Drove A: 0, B: 0, flags_in: 0, operation: 0", $time);
       end
     end
 
