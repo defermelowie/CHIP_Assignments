@@ -14,6 +14,8 @@ class monitor;
   task run();
     transaction tra;
 
+    $display($sformatf("[%t | MON] I will start monitoring", $time));
+
     forever begin
       @(negedge this.ifc.clock);
       tra = new(this.ifc.data_a, this.ifc.data_b, this.ifc.flags_in, this.ifc.operation, this.ifc.data_z, this.ifc.flags_out);

@@ -12,10 +12,8 @@ class driver;
   endfunction : new
 
   
-  task run_addition();
+  task run();
     transaction tra;
-
-    $timeformat(-9,0," ns" , 10);
 
     $display($sformatf("[%t | DRV] I will start driving", $time));
     
@@ -39,6 +37,16 @@ class driver;
       end
     end
 
-  endtask : run_addition
+  endtask : run
+
+  task reset_dut();
+    @(negedge this.ifc.clock);
+    this.ifc.data_a <= 0;
+    this.ifc.data_b <= 0;
+    this.ifc.flags_in <= 0;
+    this.ifc.operation <= 0;
+    $display("[%t | DRV] DUT RESET", $time);
+    $display("[%t | DRV] Drove A: 00, B: 00, flags_in: 0, operation: 0", $time);
+  endtask
 
 endclass : driver

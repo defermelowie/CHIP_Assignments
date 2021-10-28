@@ -61,10 +61,11 @@ class environment;
       // First test
       fork
         begin
+          this.drv.reset_dut();
           flush_mailboxes();
 
           fork
-            this.drv.run_addition();
+            this.drv.run();
             this.che.run();
             this.mon.run();
           join_none;
@@ -85,10 +86,11 @@ class environment;
       // Second test
       fork
         begin
+          this.drv.reset_dut();
           flush_mailboxes();
 
           fork
-            this.drv.run_addition();
+            this.drv.run();
             this.che.run();
             this.mon.run();
           join_none;
@@ -109,10 +111,11 @@ class environment;
       // Third test
       fork
         begin
+          this.drv.reset_dut();
           flush_mailboxes();
 
           fork
-            this.drv.run_addition();
+            this.drv.run();
             this.che.run();
             this.mon.run();
           join_none;
@@ -133,10 +136,11 @@ class environment;
       // Fourth test
       fork
         begin
+          this.drv.reset_dut();
           flush_mailboxes();
 
           fork
-            this.drv.run_addition();
+            this.drv.run();
             this.che.run();
             this.mon.run();
           join_none;
