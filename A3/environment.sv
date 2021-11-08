@@ -83,7 +83,7 @@ class environment;
           // Start generator for specific test and scoreboard for specific nr of tests
           fork
             this.gen.run(1);
-            this.scb.run(100);
+            this.scb.run(800);
           join_any;
 
           // Stops generator, driver, checker & monitor after scoreboard has finished
