@@ -1,7 +1,7 @@
-`ifndef TRANSACTION
-`define TRANSACTION
+`ifndef SV_OPCODE
+`define SV_OPCODE
 
-class transaction;
+class opcode;
     rand byte opcode;
 
     /******************
@@ -66,6 +66,6 @@ class transaction;
     function new();
         this.opcode = 0;
     endfunction //new()
-endclass //transaction
+endclass //opcode
 
-`endif TRANSACTION
+`endif
