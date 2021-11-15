@@ -1,8 +1,8 @@
 `ifndef SV_DRV_GBP
 `define SV_DRV_GBP
 
-`include "transaction.sv"
 `include "gbp_iface.sv"
+`include "opcode.sv"
 
 class gbp_driver;
 
@@ -14,19 +14,20 @@ class gbp_driver;
         this.gen2drv = gen2drv;
     endfunction : new
 
-    task run;
-        opcode opcode;
+    task run();
+        opcode opc;
+        
         $display($sformatf("[%t | DRV] Started driving", $time));
 
         forever begin
-            int data_available = this.gen2drv.try_get(opcode);
+            int data_available = this.gen2drv.try_get(opc);
 
             @(negedge this.ifc.clock);
 
             if(data_available) begin
-                this.ifc.opcode <= opcode.opcode;
+                this.ifc.opcode <= opc.opcode;
                 this.ifc.valid <= 1;
-                $display("[%t | DRV] Drove opcode: %02x", $time, opcode.opcode);
+                $display("[%t | DRV] Drove opcode: %02x", $time, opc.opcode);
             end else begin
                 this.ifc.valid <= 0;
             end
