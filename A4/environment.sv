@@ -27,6 +27,13 @@ class environment;
     mailbox #(probe) mon2che;
     mailbox #(byte) che2scb;
 
+    covergroup cg1 @(posedge clock);
+        c1: coverpoint ifc.valid;
+        c2: coverpoint ifc.opcode[5:0];
+    endgroup
+
+    cg1 cg_inst = new;
+
     function new(virtual gbp_iface ifc);
         this.ifc = ifc;
 
@@ -78,7 +85,7 @@ class environment;
                     this.che.run();
                     this.mon.run();
                     this.gen.run();
-                    this.scb.run(20);
+                    this.scb.run_coverage();
                 join_any;
 
                 disable fork;

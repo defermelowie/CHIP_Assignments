@@ -39,6 +39,22 @@ class scoreboard;
     no_tests_done = no_tests_done + NOT_done;
   endtask : run
 
+  task run_coverage();
+    while ($get_coverage != 100)
+    begin
+      this.che2scb.get(result);
+      
+      if (result > 0)
+      begin 
+        no_tests_ok++; 
+        //$display("[%t | SCB] successful test registered", $time);
+      end else begin
+        no_tests_nok++;
+        //$display("[%t | SCB] unsuccessful test registered", $time);
+      end
+    end /* while */
+  endtask : run_coverage
+
 
   task showReport;
     $display("\n[%t | SCB] Test report", $time);

@@ -1,5 +1,5 @@
 do "compile.do"
-vsim -voptargs="+acc" top
+vsim -voptargs=“+acc” -coverage top
 
 # add wave -noupdate /top/theInterface/clock
 # add wave -noupdate -divider In
