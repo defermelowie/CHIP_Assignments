@@ -31,10 +31,10 @@ class gameboyprocessor;
 
     /* A simple to string function to consult the internals. */
     task toString();
-        $display("REG A : %02X \t\t REG F : %02X", this.A, this.F);
-        $display("REG B : %02X \t\t REG C : %02X", this.B, this.C);
-        $display("REG D : %02X \t\t REG E : %02X", this.D, this.E);
-        $display("REG H : %02X \t\t REG L : %02X", this.H, this.L);
+        $display("[MOD] REG A : %02X \t\t REG F : %02X", this.A, this.F);
+        $display("[MOD] REG B : %02X \t\t REG C : %02X", this.B, this.C);
+        $display("[MOD] REG D : %02X \t\t REG E : %02X", this.D, this.E);
+        $display("[MOD] REG H : %02X \t\t REG L : %02X", this.H, this.L);
     endtask : toString
 
     /* This is a getter function to acquire the value of a register. */
@@ -61,6 +61,7 @@ class gameboyprocessor;
     /* The model performs the same operation on its internal */
     /* registers as the DUT. */
     task executeALUInstruction(byte instr);
+        $display("[%t | MOD] Exec opcode: %02x", $time, instr);
         shortint a, b, c, z;
 
         a = unsigned'(this.A);
