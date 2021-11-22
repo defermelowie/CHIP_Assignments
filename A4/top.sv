@@ -36,10 +36,10 @@ module top;
                 bins adc = {'h11};
                 bins sub = {'h12};
                 bins sbc = {'h13};
-                bins and = {'h14}:
-                bins xor = {'h15};
-                bins or = {'h16};
-                bins cp = {'h17};
+                bins andi = {'h14}:
+                bins xori = {'h15};
+                bins ori = {'h16};
+                bins cpi = {'h17};
             }
 
         c2: coverpoint theInterface.opcode[3:0] iff(theInterface.valid);
