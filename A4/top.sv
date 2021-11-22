@@ -28,7 +28,20 @@ module top;
   
   
     covergroup cg1 @(posedge clock);
-        c1: coverpoint theInterface.opcode;
+        option.at_least = 100;
+
+        operation: coverpoint theInterface.opcode[7:3]{
+            iff(theInterface.valid) {
+                bins add = {'h10}
+                bins adc = {'h11}
+                bins sub = {'h12}
+                bins sbc = {'h13}
+            }
+        }
+
+        c2: coverpoint theInterface.opcode[3:0]{
+            iff(theInterface.valid);
+        }
     endgroup
   
     cg1 cg_inst = new();
