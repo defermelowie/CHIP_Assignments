@@ -23,10 +23,12 @@ class gbp_monitor;
         $display($sformatf("[%t | MON] Started monitoring", $time));
 
         forever begin
+            A = prev_A;
             @(negedge this.ifc.clock);
             prev_A = ifc.probe[15:8];
             flags = ifc.probe[7:0];
             probe = new({A, flags});
+            $display("[%t | MON] Opcode: %02x", $time, ifc.opcode);
             $display("[%t | MON] Recieved: %s", $time, probe.toString());
             mon2che.put(probe);
         end
