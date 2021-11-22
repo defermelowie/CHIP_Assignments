@@ -44,11 +44,11 @@ class environment;
         this.scb = new(this.che2scb);
     endfunction : new
 
-    task flush_mailboxes;
+    task flush_mailboxes();
         byte result;
         opcode code;
         probe prob;
-        
+
         int g2d = 1;
         int g2c = 1;
         int c2s = 1;

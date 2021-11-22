@@ -5,7 +5,7 @@
 
 class gbp_monitor;
 
-    virtual ALU_iface ifc;
+    virtual gbp_iface ifc;
     mailbox #(probe) mon2che;
 
     function new(virtual gbp_iface ifc, mailbox #(probe) m2c);
