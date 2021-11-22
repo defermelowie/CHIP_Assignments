@@ -23,7 +23,7 @@ class gbp_monitor;
 
         forever begin
             prev_valid = valid;
-            @(negedge this.ifc.clock);
+            @(posedge this.ifc.clock);
             valid = ifc.valid;
             if (prev_valid) begin
                 probe = new(ifc.probe);
