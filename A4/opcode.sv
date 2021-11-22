@@ -11,7 +11,7 @@ class opcode;
 
     // ALU
     constraint ALU_opcode {
-        (opcode[7:4] inside {[8:11]};
+        (opcode[7:4] inside {[8:11]});
     }
 
     // Arithmetic
