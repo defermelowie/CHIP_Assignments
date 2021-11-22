@@ -39,9 +39,7 @@ module top;
             }
         }
 
-        c2: coverpoint theInterface.opcode[3:0]{
-            iff(theInterface.valid);
-        }
+        c2: coverpoint theInterface.opcode[3:0] iff(theInterface.valid);
     endgroup
   
     cg1 cg_inst = new();
