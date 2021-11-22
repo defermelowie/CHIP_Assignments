@@ -9,14 +9,15 @@
 `include "model.sv"
 `include "opcode.sv"
 `include "probe.sv"
+`include "scoreboard.sv"
 
 class environment;
 
     virtual gbp_iface ifc;
 
     generator gen;
-    driver drv;
-    monitor mon;
+    gbp_driver drv;
+    gbp_monitor mon;
     checkers che;
     scoreboard scb;
     gameboyprocessor mdl;
