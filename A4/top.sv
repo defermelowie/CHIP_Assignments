@@ -36,7 +36,7 @@ module top;
                 bins adc = {'h11};
                 bins sub = {'h12};
                 bins sbc = {'h13};
-                bins andi = {'h14}:
+                bins andi = {'h14};
                 bins xori = {'h15};
                 bins ori = {'h16};
                 bins cpi = {'h17};
