@@ -36,7 +36,7 @@ class gbp_monitor;
             probe = new({prev_A, flags});
             if (valid) begin
                 //$display("[%t | MON] Recieved: Opcode: %02x", $time, ifc.opcode);
-                $display("[%t | MON] Recieved: %s opcode: %02x", $time, probe.toString(), opcode.opcode);
+                $display("[%t | MON] Recieved: %s opcode: %02x", $time, probe.toString(), ifc.opcode);
                 mon2che.put(probe);
             end
         end
