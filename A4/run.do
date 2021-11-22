@@ -11,4 +11,7 @@ vsim -voptargs="+acc" top
 # add wave -noupdate /top/theInterface/data_z
 # add wave -noupdate /top/theInterface/flags_out
 
-run -a
+# run -a
+run 10 us
+
+do "coverage.do"
