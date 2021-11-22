@@ -28,7 +28,7 @@ class checkers;
             this.gen2che.get(opcode);
 
             this.model.executeALUInstruction(opcode.get());
-            if (this.model.F == probe.F)
+            if (this.model.F == probe.F && this.model.A == probe.A)
             begin
                 this.che2scb.put(byte'(1));
             end else begin
