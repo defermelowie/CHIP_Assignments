@@ -25,13 +25,6 @@ class opcode;
     function new();
         this.opcode = 0;
     endfunction //new()
-
-    /******************
-    *    Functions    *
-    ******************/
-    function get();
-        return this.opcode;        
-    endfunction
 endclass //opcode
 
 `endif

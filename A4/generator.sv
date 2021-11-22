@@ -19,7 +19,7 @@ class generator;
             opcode = this.generateOpcode();
             this.gen2drv.put(opcode);
             this.gen2che.put(opcode);
-            $display("[%t | GEN] Generated opcode: %02x", $time, opcode.opcode);
+            //$display("[%t | GEN] Generated opcode: %02x", $time, opcode.opcode);
         end
     endtask
 

@@ -26,8 +26,8 @@ class checkers;
         forever begin
             this.mon2che.get(probe);
             this.gen2che.get(opcode);
-            this.model.executeALUInstruction(opcode.get());
-            
+            this.model.executeALUInstruction(opcode.opcode);
+
             if (this.model.F == probe.F && this.model.A == probe.A)
             begin
                 this.che2scb.put(byte'(1));
