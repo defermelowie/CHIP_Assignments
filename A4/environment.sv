@@ -14,17 +14,17 @@ class environment;
 
     virtual gbp_iface ifc;
 
-    mailbox #(opcode) gen2drv;
-    mailbox #(opcode) gen2che;
-    mailbox #(probe) mon2che;
-    mailbox #(byte) che2scb;
-
     generator gen;
     driver drv;
     monitor mon;
     checkers che;
     scoreboard scb;
     gameboyprocessor mdl;
+
+    mailbox #(opcode) gen2drv;
+    mailbox #(opcode) gen2che;
+    mailbox #(probe) mon2che;
+    mailbox #(byte) che2scb;
 
     function new(virtual gbp_iface ifc);
         this.ifc = ifc;

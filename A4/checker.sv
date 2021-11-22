@@ -38,6 +38,7 @@ class checkers;
                 $display("[CHE] Probe: %s", probe.toString());
                 model.toString();
             end
+        end
     endtask
 
 endclass : checkers
