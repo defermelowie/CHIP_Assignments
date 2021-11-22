@@ -32,10 +32,10 @@ module top;
 
         operation: coverpoint theInterface.opcode[7:3]
             iff(theInterface.valid) {
-                bins add = {'h10}
-                bins adc = {'h11}
-                bins sub = {'h12}
-                bins sbc = {'h13}
+                bins add = {'h10};
+                bins adc = {'h11};
+                bins sub = {'h12};
+                bins sbc = {'h13};
             }
 
         c2: coverpoint theInterface.opcode[3:0] iff(theInterface.valid);
