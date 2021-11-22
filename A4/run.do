@@ -1,8 +1,7 @@
 do "compile.do"
 vsim -voptargs="+acc" top
 
-# run -a
-run 10 us
+run -a
 
 # do "coverage.do"
 coverage report
