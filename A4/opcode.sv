@@ -11,7 +11,7 @@ class opcode;
 
     // ALU
     constraint ALU_opcode {
-        (opcode[7:4] inside {'h8, 'hb});
+        (opcode[7:4] inside {['h8:'hb]);
     }
 
     // Arithmetic
