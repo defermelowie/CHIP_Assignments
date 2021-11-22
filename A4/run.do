@@ -5,3 +5,4 @@ vsim -voptargs="+acc" top
 run 10 us
 
 # do "coverage.do"
+coverage report
