@@ -16,6 +16,8 @@ class gbp_monitor;
     task run();
         probe probe;
 
+        byte valid;
+        byte prev_valid;
         byte A;
         byte prev_A;
         byte flags;
@@ -24,13 +26,17 @@ class gbp_monitor;
 
         forever begin
             A = prev_A;
+            valid = prev_valid;
             @(negedge this.ifc.clock);
+            prev_valid = ifc.valid;
             prev_A = ifc.probe[15:8];
             flags = ifc.probe[7:0];
             probe = new({A, flags});
-            $display("[%t | MON] Recieved: Opcode: %02x", $time, ifc.opcode);
-            $display("[%t | MON] Recieved: %s", $time, probe.toString());
-            mon2che.put(probe);
+            if (valid) begin
+                $display("[%t | MON] Recieved: Opcode: %02x", $time, ifc.opcode);
+                $display("[%t | MON] Recieved: %s", $time, probe.toString());
+                mon2che.put(probe);
+            end
         end
     endtask : run
 
