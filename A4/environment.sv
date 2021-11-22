@@ -24,7 +24,7 @@ class environment;
     monitor mon;
     checkers che;
     scoreboard scb;
-    model mdl;
+    gameboyprocessor mdl;
 
     function new(virtual gbp_iface ifc);
         this.ifc = ifc;

@@ -10,9 +10,9 @@ class checkers;
     mailbox #(opcode) gen2che;
     mailbox #(probe) mon2che;
     mailbox #(byte) che2scb;
-    model model;
+    gameboyprocessor model;
 
-    function new(mailbox #(opcode) g2c, mailbox #(probe) m2c, mailbox #(byte) c2s, model mdl);
+    function new(mailbox #(opcode) g2c, mailbox #(probe) m2c, mailbox #(byte) c2s, gameboyprocessor mdl);
         this.gen2che = g2c;
         this.mon2che = m2c;
         this.che2scb = c2s;
