@@ -92,13 +92,6 @@ class environment;
     end 
     endtask : run
 
-    covergroup cg1 @(posedge ifc.clock);
-        c1: coverpoint ifc.valid;
-        c2: coverpoint ifc.opcode[5:0];
-    endgroup
-
-    cg1 cg_inst = new();
-
 endclass : environment
 
 `endif
