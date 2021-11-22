@@ -84,6 +84,7 @@ begin
         flags_out <= Zfl_o & '0' & '0' & '0';
         C_i <= '0';
       when "111"  => -- CP
+        -- Z_i <= sum;
         Z_i <= A_i;
         flags_out <= Zfl_o & '1' & not(Hfl_o) & not(Cfl_o);
         B_ii <= not(B_i);

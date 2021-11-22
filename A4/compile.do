@@ -15,5 +15,5 @@ vlog -sv model.sv
 vlog -sv test.sv
 
 echo "compile 'DUT'"
-vcom ALU.vhdl
-vcom gbprocessor.vhdl
+vcom ALU.vhd
+vcom gbprocessor.vhd
