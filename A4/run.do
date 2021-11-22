@@ -2,6 +2,6 @@ do "compile.do"
 vsim -voptargs="+acc" top
 
 # run -a
-run 100 us
+run 10 us
 
-do "coverage.do"
+# do "coverage.do"
