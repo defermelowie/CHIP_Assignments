@@ -18,7 +18,6 @@ class gbp_monitor;
 
         byte valid;
         byte prev_valid;
-        shortint probe;
 
         $display($sformatf("[%t | MON] Started monitoring", $time));
 
