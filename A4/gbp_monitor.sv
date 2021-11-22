@@ -18,23 +18,16 @@ class gbp_monitor;
 
         byte valid;
         byte prev_valid;
-        byte A;
-        byte prev_A;
-        byte flags;
-        byte prev_flags;
+        shortint probe;
 
         $display($sformatf("[%t | MON] Started monitoring", $time));
 
         forever begin
-            prev_A = A;
             prev_valid = valid;
-            prev_flags = flags;
             @(negedge this.ifc.clock);
             valid = ifc.valid;
-            A = ifc.probe[15:8];
-            flags = ifc.probe[7:0];
             if (prev_valid) begin
-                probe = new({A, flags});
+                probe = new(ifc.probe);
                 //$display("[%t | MON] Recieved: Opcode: %02x", $time, ifc.opcode);
                 $display("[%t | MON] Recieved: %s opcode: %02x", $time, probe.toString(), ifc.opcode);
                 mon2che.put(probe);
