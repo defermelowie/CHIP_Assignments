@@ -40,6 +40,8 @@ class scoreboard;
   endtask : run
 
   task run_coverage();
+    byte result;
+
     while ($get_coverage != 100)
     begin
       this.che2scb.get(result);
@@ -52,6 +54,8 @@ class scoreboard;
         no_tests_nok++;
         //$display("[%t | SCB] unsuccessful test registered", $time);
       end
+      
+      no_tests_done++;
     end /* while */
   endtask : run_coverage
 
