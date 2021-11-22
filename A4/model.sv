@@ -61,7 +61,6 @@ class gameboyprocessor;
     /* The model performs the same operation on its internal */
     /* registers as the DUT. */
     task executeALUInstruction(byte instr);
-        $display("[%t | MOD] Exec opcode: %02x", $time, instr);
         shortint a, b, c, z;
 
         a = unsigned'(this.A);
@@ -123,7 +122,8 @@ class gameboyprocessor;
         this.F[7] = ((z==0) ? 1'b1 : 1'b0); 
 
         this.A = byte'(z);
-
+        
+        $display("[%t | MOD] Exec opcode: %02x", $time, instr);
     endtask : executeALUInstruction
 
     function shortint generate_expected_probe();
