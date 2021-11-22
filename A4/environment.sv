@@ -78,7 +78,7 @@ class environment;
                     this.che.run();
                     this.mon.run();
                     this.gen.run();
-                    this.scb.run(800);
+                    this.scb.run(20);
                 join_any;
 
                 disable fork;
