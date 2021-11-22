@@ -27,10 +27,10 @@ class gbp_driver;
                 this.ifc.valid <= 1;
                 this.ifc.opcode <= opc.opcode;
                 $display("[%t | DRV] Drove opcode: %02x", $time, opc.opcode);
+
                 @(negedge this.ifc.clock);
                 this.ifc.valid <= 0;
-                @(negedge this.ifc.clock);
-                @(negedge this.ifc.clock);
+                repeat (3) @(negedge this.ifc.clock);
             end else begin
                 @(negedge this.ifc.clock);
                 this.ifc.valid <= 0;
