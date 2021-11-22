@@ -21,17 +21,19 @@ class gbp_monitor;
         byte A;
         byte prev_A;
         byte flags;
+        byte prev_flags;
 
         $display($sformatf("[%t | MON] Started monitoring", $time));
 
         forever begin
-            A = prev_A;
-            valid = prev_valid;
+            prev_A = A;
+            prev_valid = valid;
+            prev_flags = flags;
             @(negedge this.ifc.clock);
-            prev_valid = ifc.valid;
-            prev_A = ifc.probe[15:8];
+            valid = ifc.valid;
+            A = ifc.probe[15:8];
             flags = ifc.probe[7:0];
-            probe = new({A, flags});
+            probe = new({prev_A, prev_flags});
             if (valid) begin
                 $display("[%t | MON] Recieved: Opcode: %02x", $time, ifc.opcode);
                 $display("[%t | MON] Recieved: %s", $time, probe.toString());
