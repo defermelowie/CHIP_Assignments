@@ -23,13 +23,12 @@ class gbp_driver;
             int data_available = this.gen2drv.try_get(opc);
 
             if(data_available) begin
-                @(posedge this.ifc.clock);
-                this.ifc.valid <= 1;
                 @(negedge this.ifc.clock);
+                this.ifc.valid <= 1;
                 this.ifc.opcode <= opc.opcode;
                 $display("[%t | DRV] Drove opcode: %02x", $time, opc.opcode);
             end else begin
-                @(posedge this.ifc.clock);
+                @(negedge this.ifc.clock);
                 this.ifc.valid <= 0;
             end
         end
