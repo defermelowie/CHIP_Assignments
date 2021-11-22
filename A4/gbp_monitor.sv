@@ -33,7 +33,7 @@ class gbp_monitor;
             valid = ifc.valid;
             A = ifc.probe[15:8];
             flags = ifc.probe[7:0];
-            probe = new({prev_A, prev_flags});
+            probe = new({prev_A, flags});
             if (valid) begin
                 $display("[%t | MON] Recieved: Opcode: %02x", $time, ifc.opcode);
                 $display("[%t | MON] Recieved: %s", $time, probe.toString());
