@@ -27,7 +27,7 @@ class gbp_monitor;
             prev_A = ifc.probe[15:8];
             flags = ifc.probe[7:0];
             probe = new({A, flags});
-            $$display("[%t | MON] Recieved: %s", $time, probe.toString());
+            $display("[%t | MON] Recieved: %s", $time, probe.toString());
             mon2che.put(probe);
         end
     endtask : run
