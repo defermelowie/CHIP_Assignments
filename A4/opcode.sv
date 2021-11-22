@@ -9,11 +9,11 @@ class opcode;
     *******************/
     // SOURCE: https://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html
 
-    /*// Arithmetic
+    // Arithmetic
     constraint arithmetic {
         (opcode[7:4] inside {'h8, 'h9});
     }
-    
+    /*
     // Logical
     constraint logical {
         (opcode[7:4] inside {'ha, 'hb});
