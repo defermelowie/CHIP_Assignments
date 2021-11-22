@@ -33,9 +33,8 @@ class checkers;
                 this.che2scb.put(byte'(1));
             end else begin
                 this.che2scb.put(byte'(0));
-                $display("----------------------------------------");
                 $display("[%t | CHE] Unsuccessful test registered", $time);
-                $display("[CHE] Probe: %s", probe.toString());
+                $display("[%t | CHE] Probe: %s", probe.toString());
                 model.toString();
             end
         end
