@@ -2,17 +2,17 @@ echo "creating 'work' lib"
 vlib work
 
 echo "compile verification classes"
-vlog -sv top.sv -cover bcestf
-vlog -sv environment.sv -cover bcestf
-vlog -sv checker.sv -cover bcestf
-vlog -sv scoreboard.sv -cover bcestf
-vlog -sv generator.sv -cover bcestf
-vlog -sv opcode.sv -cover bcestf
-vlog -sv probe.sv -cover bcestf
-vlog -sv gbp_monitor.sv -cover bcestf
-vlog -sv gbp_iface.sv -cover bcestf
-vlog -sv model.sv -cover bcestf
-vlog -sv test.sv -cover bcestf
+vlog -sv top.sv
+vlog -sv environment.sv
+vlog -sv checker.sv
+vlog -sv scoreboard.sv
+vlog -sv generator.sv
+vlog -sv opcode.sv
+vlog -sv probe.sv
+vlog -sv gbp_monitor.sv
+vlog -sv gbp_iface.sv
+vlog -sv model.sv
+vlog -sv test.sv
 
 echo "compile 'DUT'"
 vcom ALU.vhd
