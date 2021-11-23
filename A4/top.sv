@@ -79,9 +79,9 @@ module top;
             }
             
         cx: cross C_flag, operation{
-            bins c_in_adc = binsof(operation.adc) && binsof(C_flag.high)
-            bins c_in_sbc = binsof(operation.sbc) && binsof(C_flag.high)
-            bins c_in_cpi = binsof(operation.cpi) && binsof(C_flag.high)
+            bins c_in_adc = binsof(operation.adc) && binsof(C_flag.high);
+            bins c_in_sbc = binsof(operation.sbc) && binsof(C_flag.high);
+            bins c_in_cpi = binsof(operation.cpi) && binsof(C_flag.high);
         }
     endgroup
   
