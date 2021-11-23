@@ -53,10 +53,36 @@ module top;
                 bins hl = {'h6};
                 bins a = {'h7};
             }
-        Z_flag: coverpoint theInterface.probe[7] iff(theInterface.valid);
-        N_flag: coverpoint theInterface.probe[6] iff(theInterface.valid);
-        H_flag: coverpoint theInterface.probe[5] iff(theInterface.valid);
-        C_flag: coverpoint theInterface.probe[4] iff(theInterface.valid);
+
+        Z_flag: coverpoint theInterface.probe[7]
+            iff(theInterface.valid) {
+                bins high = {'b1};
+                bins low = {'b0};
+            }
+
+        N_flag: coverpoint theInterface.probe[6]
+            iff(theInterface.valid) {
+                bins high = {'b1};
+                bins low = {'b0};
+            }
+
+        H_flag: coverpoint theInterface.probe[5]
+            iff(theInterface.valid) {
+                bins high = {'b1};
+                bins low = {'b0};
+            }
+
+        C_flag: coverpoint theInterface.probe[4]
+            iff(theInterface.valid) {
+                bins high = {'b1};
+                bins low = {'b0};
+            }
+            
+        cx: cross C_flag, operation{
+            bins c_in_adc = binsof(operation.adc) && binsof(C_flag.high)
+            bins c_in_sbc = binsof(operation.sbc) && binsof(C_flag.high)
+            bins c_in_cpi = binsof(operation.cpi) && binsof(C_flag.high)
+        }
     endgroup
   
     cg1 cg_inst = new();
