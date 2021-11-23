@@ -28,7 +28,7 @@ module top;
   
   
     covergroup cg1 @(posedge clock);
-        option.at_least = 100;
+        option.at_least = 1000;
 
         operation: coverpoint theInterface.opcode[7:3]
             iff(theInterface.valid) {
