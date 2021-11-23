@@ -54,23 +54,23 @@ module top;
         //        bins a = {'h7};
         //    }
 
-        Z_flag: coverpoint theInterface.probe[7]
-            iff(theInterface.valid) {
-                bins high = {'b1};
-                //bins low = {'b0};
-            }
+        //Z_flag: coverpoint theInterface.probe[7]
+        //    iff(theInterface.valid) {
+        //        bins high = {'b1};
+        //        //bins low = {'b0};
+        //    }
 
-        N_flag: coverpoint theInterface.probe[6]
-            iff(theInterface.valid) {
-                bins high = {'b1};
-                //bins low = {'b0};
-            }
+        //N_flag: coverpoint theInterface.probe[6]
+        //    iff(theInterface.valid) {
+        //        bins high = {'b1};
+        //        //bins low = {'b0};
+        //    }
 
-        H_flag: coverpoint theInterface.probe[5]
-            iff(theInterface.valid) {
-                bins high = {'b1};
-                //bins low = {'b0};
-            }
+        //H_flag: coverpoint theInterface.probe[5]
+        //    iff(theInterface.valid) {
+        //        bins high = {'b1};
+        //        //bins low = {'b0};
+        //    }
 
         C_flag: coverpoint theInterface.probe[4]
             iff(theInterface.valid) {
