@@ -42,7 +42,21 @@ module top;
                 bins cpi = {'h17};
             }
 
-        c2: coverpoint theInterface.opcode[3:0] iff(theInterface.valid);
+        register: coverpoint theInterface.opcode[2:0] 
+            iff(theInterface.valid){
+                bins b = {'h0};
+                bins c = {'h1};
+                bins d = {'h2};
+                bins e = {'h3};
+                bins h = {'h4};
+                bins l = {'h5};
+                bins hl = {'h6};
+                bins a = {'h7};
+            }
+        Z_flag: coverpoint theInterface.probe[7] iff(theInterface.valid);
+        N_flag: coverpoint theInterface.probe[6] iff(theInterface.valid);
+        H_flag: coverpoint theInterface.probe[5] iff(theInterface.valid);
+        C_flag: coverpoint theInterface.probe[4] iff(theInterface.valid);
     endgroup
   
     cg1 cg_inst = new();
