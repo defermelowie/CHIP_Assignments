@@ -123,7 +123,7 @@ class gameboyprocessor;
 
         this.A = byte'(z);
         
-        $display("[%t | MOD] Exec opcode: %02x", $time, instr);
+        //$display("[%t | MOD] Exec opcode: %02x", $time, instr);
     endtask : executeALUInstruction
 
     function shortint generate_expected_probe();

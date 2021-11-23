@@ -26,7 +26,7 @@ class gbp_driver;
                 @(negedge this.ifc.clock);
                 this.ifc.valid <= 1;
                 this.ifc.opcode <= opc.opcode;
-                $display("[%t | DRV] Drove opcode: %02x", $time, opc.opcode);
+                //$display("[%t | DRV] Drove opcode: %02x", $time, opc.opcode);
 
                 @(negedge this.ifc.clock);
                 this.ifc.valid <= 0;
