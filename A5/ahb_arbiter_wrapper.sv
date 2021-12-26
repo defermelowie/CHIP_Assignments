@@ -26,13 +26,13 @@ module ahb_arbiter_wrapper (
 
     initial begin
         // There can max be one HGRANTx be high
-        only_one_master: assert ($countones(HGRANTx) <= 1) else $fatal("%m fail: Granted %d masters", $countones(HGRANTx));
+        only_one_master: assert ($countones(HGRANTx) <= 1) else $error("%m fail: Granted %d masters", $countones(HGRANTx));
     end
 
     /* Concurrent Assertions */
 
     // Grant goes low after ready
-    grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0));
+    grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("%m fail");
 
 
 endmodule : ahb_arbiter_wrapper
