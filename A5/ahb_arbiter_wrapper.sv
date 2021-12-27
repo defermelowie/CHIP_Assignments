@@ -18,16 +18,21 @@ module ahb_arbiter_wrapper (
         HREADY, HMASTER, HMASTLOCK
     );
 
+    initial begin
+        $timeformat(-9,0," ns" , 7);
+    end
+
     /***************************
     *        Assertions        *
     ***************************/
 
     /* Immediate Assertions */
 
-    /*initial begin
-        // There is maximum one HGRANTx high
-        // only_one_master: assert ($countones(HGRANTx[15:0]) <= 1) else $error("[%t | %m] fail: Granted %d masters", $time, $countones(HGRANTx[15:0]));
-    end*/
+    /*
+    initial begin
+
+    end
+    */
 
     /* Concurrent Assertions */
 
