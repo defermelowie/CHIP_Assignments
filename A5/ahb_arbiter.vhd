@@ -33,6 +33,7 @@ architecture Behavioural of ahb_arbiter is
 
     constant C_FORCE_MULTIPLE_GRANT : STD_LOGIC := '0';
     constant C_DENY_GRANT_MA02 : STD_LOGIC := '0';
+    constant C_GRANT_MA03_WITHOUT_REQUEST : STD_LOGIC := '1';
 
     signal HCLK_i : STD_LOGIC;
     signal HRESETn_i : STD_LOGIC;
@@ -68,8 +69,8 @@ begin
 
 
 
-    HGRANTx(1 downto 0) <= HGRANTx_i(1 downto 0);
-    HGRANTx(14 downto 3) <= HGRANTx_i(14 downto 3);
+    -- HGRANTx(1 downto 0) <= HGRANTx_i(1 downto 0);
+    HGRANTx(14 downto 4) <= HGRANTx_i(14 downto 4);
 
     DENY_GRANT_MA02: if C_DENY_GRANT_MA02='1' generate
         HGRANTx(2) <= '0';
@@ -84,6 +85,15 @@ begin
     FORCE_MULTIPLE_GRANT_n: if C_FORCE_MULTIPLE_GRANT='0' generate
         HGRANTx(15) <= HGRANTx_i(15);
     end generate FORCE_MULTIPLE_GRANT_n;
+
+    GRANT_MA03_WITHOUT_REQUEST: if C_GRANT_MA03_WITHOUT_REQUEST='1' generate
+        HGRANTx(3) <= HGRANTx_i(1);
+        HGRANTx(1) <= '0';
+    end generate GRANT_MA03_WITHOUT_REQUEST;
+    GRANT_MA03_WITHOUT_REQUEST_n: if C_GRANT_MA03_WITHOUT_REQUEST='0' generate
+        HGRANTx(3) <= HGRANTx_i(3);
+        HGRANTx(1) <= HGRANTx_i(1);
+    end generate GRANT_MA03_WITHOUT_REQUEST_n;
 
     
 
