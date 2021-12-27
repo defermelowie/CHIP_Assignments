@@ -97,7 +97,7 @@ begin
     end generate GRANT_MA03_WITHOUT_REQUEST_n;
 
     GRANT_MA00_HIGH_AFTER_READY: if C_GRANT_MA00_HIGH_AFTER_READY='1' generate
-        HGRANTx(0) <= HGRANTx_i(0) or curState == sIdle;
+        HGRANTx(0) <= HGRANTx_i(0) or curState = sIdle;
     end generate GRANT_MA00_HIGH_AFTER_READY;
     GRANT_MA00_HIGH_AFTER_READY_n: if C_GRANT_MA00_HIGH_AFTER_READY='0' generate
         HGRANTx(0) <= HGRANTx_i(0);
