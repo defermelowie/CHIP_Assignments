@@ -45,7 +45,7 @@ module ahb_arbiter_wrapper (
     grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("[%t | %m] fail", $time);
 
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
-    reset_is_eventually_deactivated: assert property (@(posedge HCLK) s_eventually !HRESETn) else $error("[%t | %m] fail", $time);
+    reset_is_eventually_deactivated: assert property (@(posedge HCLK) s_eventually HRESETn) else $error("[%t | %m] fail", $time);
 
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
     grant_is_eventually_given: assert property (@(posedge HCLK) s_eventually HBUSREQx[2] -> HGRANTx[2]) else $error("[%t | %m] fail", $time);
