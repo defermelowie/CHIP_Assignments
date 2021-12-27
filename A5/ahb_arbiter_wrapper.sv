@@ -44,6 +44,7 @@ module ahb_arbiter_wrapper (
     grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("[%t | %m] failed", $time);
 
     //Grant is never given without request
+    // SOURCE: https://verificationacademy.com/forums/systemverilog/parameterized-assertionssva-bit-wise-using-generate-block
     for(genvar i=0;i<=15;i++) 
         grant_only_after_request: assert property (@(posedge HCLK) (!HBUSREQx[i] |-> !HGRANTx[i])) 
         else $error("[%t | %m] failed for master %d", $time, i);  
@@ -56,7 +57,6 @@ module ahb_arbiter_wrapper (
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
     for(genvar i=0;i<=15;i++)
         grant_is_given: assert property (@(posedge HCLK) (s_eventually HBUSREQx[i] -> HGRANTx[i])) 
-        else $error("[%m] failed for master %d", $time, i);
-
+        else $error("[%m] failed for master %d", i);
 
 endmodule : ahb_arbiter_wrapper
