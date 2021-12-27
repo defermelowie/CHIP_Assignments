@@ -25,14 +25,14 @@ module ahb_arbiter_wrapper (
     /* Immediate Assertions */
 
     initial begin
-        // There can max be one HGRANTx be high
-        only_one_master: assert ($countones(HGRANTx) <= 1) else $error("%m fail: Granted %d masters", $countones(HGRANTx));
+        // There can be maximum one HGRANTx high
+        only_one_master: assert ($countones(HGRANTx) <= 1) else $error("[%t | %m] fail: Granted %d masters", $time, $countones(HGRANTx));
     end
 
     /* Concurrent Assertions */
 
     // Grant goes low after ready
-    grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("%m fail");
+    grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("[%t | %m] fail", $time);
 
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
     // URL: https://link-springer-com.kuleuven.e-bronnen.be/content/pdf/10.1007%2F978-3-319-07139-8.pdf

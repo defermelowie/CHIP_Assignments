@@ -42,7 +42,7 @@ add wave sim:/ahb_arbiter_tb/ready_indiv(3)
 
 restart -f
 
-run 2 us;
+run 2.5 us;
 
 configure wave -signalnamewidth 1
-WaveRestoreZoom {0 ps} {2000000 ps}
+WaveRestoreZoom {0 ps} {2500000 ps}
