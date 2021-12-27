@@ -46,7 +46,7 @@ module ahb_arbiter_wrapper (
 
     //Grant is never given without request
     // TODO: Check for all masters
-    grant_without_request: assert property (@(posedge HCLK) (!HBUSREQx[3] -> !HGRANTx[3])) else $error("[%t | %m] failed", $time);
+    grant_without_request: assert property (@(posedge HCLK) (!HBUSREQx[3] |-> !HGRANTx[3])) else $error("[%t | %m] failed", $time);
 
     // Reset is eventually deactivated
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
