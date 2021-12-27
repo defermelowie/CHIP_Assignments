@@ -68,7 +68,7 @@ begin
         pointer <= 0;
         wait for clock_period*10;
 
-        HRESETn <= '1';
+        -- HRESETn <= '1';
         wait for clock_period*10;
 
         -- REQUEST M0
