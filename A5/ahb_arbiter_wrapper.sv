@@ -31,7 +31,7 @@ module ahb_arbiter_wrapper (
 
     /* Concurrent Assertions */
 
-    test_m1: assert property (@(posedge HCLK) (~HGRANTx[1])) else $info("[%t | %m] info: Granted %d masters", $time, $countones(HGRANTx[15:0]));
+    test_m1: assert property (@(posedge HCLK) (HRESETn & ~HGRANTx[1])) else $info("[%t | %m] info: Granted %d masters", $time, $countones(HGRANTx[15:0]));
 
     // Grant goes low after ready
     grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("[%t | %m] fail", $time);
