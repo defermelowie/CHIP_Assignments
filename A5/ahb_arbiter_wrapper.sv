@@ -25,8 +25,8 @@ module ahb_arbiter_wrapper (
     /* Immediate Assertions */
 
     initial begin
-        // There can be maximum one HGRANTx high
-        only_one_master: assert ($countones(HGRANTx) <= 1) else $error("[%t | %m] fail: Granted %d masters", $time, $countones(HGRANTx));
+        // There is maximum one HGRANTx high
+        only_one_master: assert ($countones(HGRANTx) < 2) else $error("[%t | %m] fail: Granted %d masters", $time, $countones(HGRANTx));
     end
 
     /* Concurrent Assertions */
