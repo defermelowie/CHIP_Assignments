@@ -34,7 +34,7 @@ architecture Behavioural of ahb_arbiter is
     constant C_FORCE_MULTIPLE_GRANT : STD_LOGIC := '0';
     constant C_DENY_GRANT_MA02 : STD_LOGIC := '0';
     constant C_GRANT_MA03_WITHOUT_REQUEST : STD_LOGIC := '0';
-    constant C_GRANT_MA00_HIGH_AFTER_READY : STD_LOGIC := '1';
+    constant C_GRANT_MA00_HIGH_AFTER_READY : STD_LOGIC := '0';
 
     signal HCLK_i : STD_LOGIC;
     signal HRESETn_i : STD_LOGIC;

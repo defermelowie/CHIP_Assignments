@@ -41,21 +41,20 @@ module ahb_arbiter_wrapper (
     only_one_master: assert property (@(posedge HCLK) ($countones(HGRANTx) <= 1)) else   $error("[%t | %m] failed: Granted %d masters", $time, $countones(HGRANTx));
 
     // Grant goes low after ready
-    // TODO: Create error constant in DUT
     grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("[%t | %m] failed", $time);
 
     //Grant is never given without request
     // TODO: Check for all masters
-    grant_without_request: assert property (@(posedge HCLK) (!HBUSREQx[3] |-> !HGRANTx[3])) else $error("[%t | %m] failed", $time);
+    grant_only_after_request: assert property (@(posedge HCLK) (!HBUSREQx[3] |-> !HGRANTx[3])) else $error("[%t | %m] failed", $time);
 
     // Reset is eventually deactivated
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
-    reset_not_deactivated: assert property (@(posedge HCLK) (s_eventually HRESETn)) else $error("[%m] failed");
+    reset_deactivated: assert property (@(posedge HCLK) (s_eventually HRESETn)) else $error("[%m] failed");
 
     // Grant is eventually given
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
     // TODO: Check for all masters
-    grant_not_given: assert property (@(posedge HCLK) (s_eventually HBUSREQx[2] -> HGRANTx[2])) else $error("[%m] failed");
+    grant_is_given: assert property (@(posedge HCLK) (s_eventually HBUSREQx[2] -> HGRANTx[2])) else $error("[%m] failed");
 
 
 endmodule : ahb_arbiter_wrapper
