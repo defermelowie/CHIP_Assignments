@@ -1,3 +1,11 @@
+/* 
+SOURCE: de cursus
+    URL: https://kuleuven-diepenbeek.github.io/cdandverif/600_assertions/
+
+SOURCE: SVA: The Power of Assertions in SystemVerilog
+    URL: https://link-springer-com.kuleuven.e-bronnen.be/content/pdf/10.1007%2F978-3-319-07139-8.pdf
+*/
+
 `timescale 1ns/1ns 
 
 module ahb_arbiter_wrapper (
@@ -26,25 +34,18 @@ module ahb_arbiter_wrapper (
     *        Assertions        *
     ***************************/
 
-    /* Immediate Assertions */
-
-    /*
-    initial begin
-
-    end
-    */
-
     /* Concurrent Assertions */
 
     // There is maximum one HGRANTx high
+    // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 7.1.4: "Number of 1-Bits"
     only_one_master: assert property (@(posedge HCLK) ($countones(HGRANTx) <= 1)) else   $error("[%t | %m] fail: Granted %d masters", $time, $countones(HGRANTx));
 
     // Grant goes low after ready
     grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("[%t | %m] fail", $time);
 
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
-    // URL: https://link-springer-com.kuleuven.e-bronnen.be/content/pdf/10.1007%2F978-3-319-07139-8.pdf
-    // TODO: Assert grant is always given
+    reset_is_eventually_deactivated: assert property (@(posedge HCLK) s_eventually !HRESETn) else $error("[%t | %m] fail", $time);
 
+    // TODO: Assert grant is always given
 
 endmodule : ahb_arbiter_wrapper
