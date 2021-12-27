@@ -97,7 +97,7 @@ begin
     end generate GRANT_MA03_WITHOUT_REQUEST_n;
 
     GRANT_HIGH_AFTER_READY: if C_GRANT_HIGH_AFTER_READY='1' generate
-        HREADY_i <= 0;
+        HREADY_i <= '0';
     end generate GRANT_HIGH_AFTER_READY;
     GRANT_HIGH_AFTER_READY_n: if C_GRANT_HIGH_AFTER_READY='0' generate
         HREADY_i <= HREADY;
