@@ -93,18 +93,16 @@ begin
         ready_indiv <= (others => '0');
         wait for clock_period*10;
 
-        -- REQUEST M2 LOCKED
-        pointer <= 2; wait for clock_period;
-        HBUSREQx <= (pointer => '1', others => '0');
-        HLOCKx <= (pointer => '1', others => '0');
-        wait until HGRANTx(pointer) = '1';
-        wait for clock_period*10;
-        ready_indiv <= (pointer => '1', others => '0');
-        wait for clock_period;
-        HBUSREQx <= (others => '0');
-        HLOCKx <= (others => '0');
-        ready_indiv <= (others => '0');
-        wait for clock_period*10;
+        -- REQUEST M2
+        -- pointer <= 2; wait for clock_period;
+        -- HBUSREQx <= (pointer => '1', others => '0');
+        -- wait until HGRANTx(pointer) = '1';
+        -- wait for clock_period*10;
+        -- ready_indiv <= (pointer => '1', others => '0');
+        -- wait for clock_period;
+        -- HBUSREQx <= (others => '0');
+        -- ready_indiv <= (others => '0');
+        -- wait for clock_period*10;
 
         -- REQUEST M3
         pointer <= 3; wait for clock_period;
@@ -116,6 +114,19 @@ begin
         HBUSREQx <= (others => '0');
         ready_indiv <= (others => '0');
         wait for clock_period*10;
+
+        -- REQUEST M2 LOCKED
+        -- pointer <= 2; wait for clock_period;
+        -- HBUSREQx <= (pointer => '1', others => '0');
+        -- HLOCKx <= (pointer => '1', others => '0');
+        -- wait until HGRANTx(pointer) = '1';
+        -- wait for clock_period*10;
+        -- ready_indiv <= (pointer => '1', others => '0');
+        -- wait for clock_period;
+        -- HBUSREQx <= (others => '0');
+        -- HLOCKx <= (others => '0');
+        -- ready_indiv <= (others => '0');
+        -- wait for clock_period*10;
 
         -- REQUEST M0 & M1
         wait for clock_period*5;
