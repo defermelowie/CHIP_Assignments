@@ -24,14 +24,15 @@ module ahb_arbiter_wrapper (
 
     /* Immediate Assertions */
 
-    initial begin
+    /*initial begin
         // There is maximum one HGRANTx high
-        only_one_master: assert ($countones(HGRANTx[15:0]) <= 1) else $error("[%t | %m] fail: Granted %d masters", $time, $countones(HGRANTx[15:0]));
-    end
+        // only_one_master: assert ($countones(HGRANTx[15:0]) <= 1) else $error("[%t | %m] fail: Granted %d masters", $time, $countones(HGRANTx[15:0]));
+    end*/
 
     /* Concurrent Assertions */
 
-    test_m1: assert property (@(posedge HCLK) (HRESETn & ~HGRANTx[1])) else $info("[%t | %m] info: Granted %d masters", $time, $countones(HGRANTx[15:0]));
+    // There is maximum one HGRANTx high
+    only_one_master: assert property (@(posedge HCLK) ($countones(HGRANTx) <= 1)) else   $error("[%t | %m] fail: Granted %d masters", $time, $countones(HGRANTx));
 
     // Grant goes low after ready
     grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("[%t | %m] fail", $time);
