@@ -33,8 +33,8 @@ architecture Behavioural of ahb_arbiter is
 
     constant C_FORCE_MULTIPLE_GRANT : STD_LOGIC := '0';
     constant C_DENY_GRANT_MA02 : STD_LOGIC := '0';
-    constant C_GRANT_MA03_WITHOUT_REQUEST : STD_LOGIC := '1';
-    constant C_GRANT_HIGH_AFTER_READY : STD_LOGIC := '0';
+    constant C_GRANT_MA03_WITHOUT_REQUEST : STD_LOGIC := '0';
+    constant C_GRANT_HIGH_AFTER_READY : STD_LOGIC := '1';
 
     signal HCLK_i : STD_LOGIC;
     signal HRESETn_i : STD_LOGIC;
@@ -64,13 +64,13 @@ begin
     HBUSREQx_i <= HBUSREQx;
     HLOCKx_i <= HLOCKx;
     HSPLIT_i <= HSPLIT;
-    HREADY_i <= HREADY;
+    -- HREADY_i <= HREADY; --> Happens in GRANT_HIGH_AFTER_READY
     HMASTER <= HMASTER_i;
     HMASTLOCK <= HMASTLOCK_i;
 
 
-
-    -- HGRANTx(1 downto 0) <= HGRANTx_i(1 downto 0);
+    HGRANTx(0) <= HGRANTx_i(0);
+    -- HGRANTx(3 downto 1) <= HGRANTx_i(3 downto 1); --> Happens in generate statements
     HGRANTx(14 downto 4) <= HGRANTx_i(14 downto 4);
 
     DENY_GRANT_MA02: if C_DENY_GRANT_MA02='1' generate
@@ -97,10 +97,10 @@ begin
     end generate GRANT_MA03_WITHOUT_REQUEST_n;
 
     GRANT_HIGH_AFTER_READY: if C_GRANT_HIGH_AFTER_READY='1' generate
-        HGRANTx(0) <= HGRANTx_i(0);
+        HREADY_i <= 0;
     end generate GRANT_HIGH_AFTER_READY;
     GRANT_HIGH_AFTER_READY_n: if C_GRANT_HIGH_AFTER_READY='0' generate
-        HGRANTx(0) <= HGRANTx_i(0);
+        HREADY_i <= HREADY;
     end generate GRANT_HIGH_AFTER_READY_n;
 
     
