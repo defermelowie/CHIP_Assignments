@@ -34,5 +34,9 @@ module ahb_arbiter_wrapper (
     // Grant goes low after ready
     grant_low_after_ready: assert property (@(posedge HCLK) (HREADY |=> HGRANTx == 0)) else $error("%m fail");
 
+    // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
+    // URL: https://link-springer-com.kuleuven.e-bronnen.be/content/pdf/10.1007%2F978-3-319-07139-8.pdf
+    // TODO: Assert grant is always given
+
 
 endmodule : ahb_arbiter_wrapper
