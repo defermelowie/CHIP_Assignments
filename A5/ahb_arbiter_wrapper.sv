@@ -56,7 +56,7 @@ module ahb_arbiter_wrapper (
     // Grant is eventually given
     // SOURCE: "SVA: The Power of Assertions in SystemVerilog" Section 5.4: "S_eventually Property"
     for(genvar i=0;i<=15;i++)
-        initial grant_is_given: assert property (@(posedge HCLK) (s_eventually HBUSREQx[i] -> HGRANTx[i])) 
+        grant_is_given: assert property (@(posedge HCLK) (s_eventually HBUSREQx[i] -> HGRANTx[i])) 
         else $error("[%m] failed for master %d", i);
 
 endmodule : ahb_arbiter_wrapper
